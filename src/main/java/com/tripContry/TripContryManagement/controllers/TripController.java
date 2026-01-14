@@ -3,6 +3,7 @@ package com.tripContry.TripContryManagement.controllers;
 import com.tripContry.TripContryManagement.entities.Trip;
 import com.tripContry.TripContryManagement.repositories.TripRepository;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +23,12 @@ public class TripController {
     public List<Trip> getAllTrips() {
         return tripRepository.findAll();
     }
+
+    @GetMapping("/{trip_id}")
+    public Trip getTripById(@PathVariable("trip_id") int trip_id) {
+        return tripRepository.findById(Long.valueOf(trip_id)).orElse(null);
+    }
+
+    
 
 }
