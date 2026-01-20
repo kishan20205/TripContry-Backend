@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.AnyDiscriminatorImplicitValues;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.List;
 @Table(name = "expenses")
 public class Expense {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO )
     private String id;
     private String title;
     private Double amount;
@@ -32,6 +34,10 @@ public class Expense {
 
     @ManyToOne
     @JoinColumn(name = "trip_id")
-    @JsonIgnore
     private Trip trip;
+
+    public void setTrip(Trip trip) {
+        this.trip = trip;
+    }
+
 }
